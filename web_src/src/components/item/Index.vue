@@ -17,6 +17,16 @@
           <el-tooltip
             class="item"
             effect="dark"
+            :content="$t('简历管理')"
+            placement="top"
+          >
+            <router-link to="/attachment/index">
+              <i class="el-icon-folder-opened"></i>
+            </router-link>
+          </el-tooltip>
+          <el-tooltip
+            class="item"
+            effect="dark"
             :content="$t('feedback')"
             placement="top"
           >
@@ -70,7 +80,8 @@
             <router-link to="/admin/index">
               <i class="el-icon-s-tools"></i>
             </router-link> </el-tooltip
-          >&nbsp;&nbsp;
+          >
+          &nbsp;&nbsp;
           <el-tooltip
             class="item"
             effect="dark"

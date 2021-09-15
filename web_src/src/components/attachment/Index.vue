@@ -207,8 +207,17 @@ export default {
         this.$message.success(this.$t('copy_success'))
       })
     },
-    beforeUpload() {
+    beforeUpload(file) {
+      if(this.containSpecial(file.name)){
+         this.$message.error("文件名不能含有特殊字符")
+        return
+      }
       this.loading = this.$loading()
+    },
+    containSpecial( s ){      
+    var containSpecial = RegExp(/[(\ )(\~)(\!)(\@)(\#)(\$)(\%)(\^)(\&)(\*)(\()(\))(\_)(\+)(\=)(\[)(\])(\{)(\})(\|)(\\)(\;)(\:)(\')(\")(\,)(\/)(\<)(\>)(\?)(\)]+/);  
+    
+    return ( containSpecial.test(s) );      
     }
   },
 

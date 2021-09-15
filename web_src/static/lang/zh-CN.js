@@ -233,6 +233,7 @@ exports.default = {
 
   team_mamage: '团队管理',
   background: '管理后台',
+  document_management: '简历管理',
   distribution_to_team: '分配项目给团队',
   back_to_team: '返回团队管理',
   check_item: '查看项目',
