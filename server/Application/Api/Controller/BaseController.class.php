@@ -92,8 +92,8 @@ class BaseController extends Controller {
 			$result['data'] = $array ;
 		}
 
-		// if ($this->is_local_debug > 0 ) {
-		if (1) {
+		if ($this->is_local_debug > 0 ) {
+		// if (1) {
 			header('Access-Control-Allow-Origin: *');//允许跨域请求
 			header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie');
 			header('Access-Control-Allow-Credentials: true');//允许跨域请求
