@@ -13,9 +13,9 @@ class BaseController extends Controller {
 
 		//做一个检测，以免这个配置更新到线上。
 		if (
-			$this->is_local_debug > 0 
-			&& strpos($_SERVER['HTTP_HOST'],'127.0.0.1') === false  
-			&& $_SERVER['HTTP_HOST'] != 'wu.com' 
+			$this->is_local_debug > 0
+			&& strpos($_SERVER['HTTP_HOST'],'127.0.0.1') === false
+			&& $_SERVER['HTTP_HOST'] != 'wu.com'
 			&& strpos($_SERVER['HTTP_HOST'], "192.168") == false
 		){
 			$this->sendError("-1001","非本地环境禁止开通调试。请通知管理员关闭调试模式");
@@ -31,7 +31,7 @@ class BaseController extends Controller {
 			$array = json_decode($json,1);
 			$_POST = array_merge($_POST,$array) ;
 		}
-		
+
     }
 
 
@@ -42,7 +42,7 @@ class BaseController extends Controller {
 			$login_user = D("User")->where("username = 'showdoc' ")->find();
 			session("login_user" , $login_user);
 		}
-		
+
 		if ( ! session("login_user")) {
 			$cookie_token = I("user_token") ? I("user_token") : cookie('cookie_token');
 			if ($cookie_token) {
@@ -63,7 +63,7 @@ class BaseController extends Controller {
 			return  session("login_user") ;
 		}
 	}
-	
+
 	//检查是否是管理员
 	public function checkAdmin($redirect = true){
 		$login_user = session("login_user") ;
@@ -91,8 +91,9 @@ class BaseController extends Controller {
 			$result['error_code'] = 0 ;
 			$result['data'] = $array ;
 		}
-		
-		if ($this->is_local_debug > 0 ) {
+
+		// if ($this->is_local_debug > 0 ) {
+		if (1) {
 			header('Access-Control-Allow-Origin: *');//允许跨域请求
 			header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie');
 			header('Access-Control-Allow-Credentials: true');//允许跨域请求
@@ -108,8 +109,8 @@ class BaseController extends Controller {
 			$info .= "\n请求".'$_REQUEST'."：\n";
 			$info .= json_encode($_REQUEST);
 			$info .= "\n返回结果：\n";
-			$info .= json_encode($result)."\n";	
-			$info .= "【★★★★★★★★★★★】\n";		
+			$info .= json_encode($result)."\n";
+			$info .= "【★★★★★★★★★★★】\n";
 			\Think\log::record($info , 'INFO');
 		}
 
@@ -118,7 +119,7 @@ class BaseController extends Controller {
 	//返回错误提示
 	protected function sendError($error_code , $error_message = ''){
 		$error_code = $error_code ? $error_code : 10103 ;
-		
+
 		//来自Html5Plus的应用允许跨域
 		if (strstr($_SERVER['HTTP_USER_AGENT'], "Html5Plus") ) {
 			header('Access-Control-Allow-Origin: *');//允许跨域请求
@@ -210,7 +211,7 @@ class BaseController extends Controller {
 		if (session("visit_item_".$item_id)) {
 			return true;
 		}
-		
+
 		if ($this->checkItemManage($uid , $item_id)) {
 			return true;
 		}
@@ -219,7 +220,7 @@ class BaseController extends Controller {
 		if ($ItemMember) {
 			return true;
 		}
-		
+
 		$TeamItemMember = D("TeamItemMember")->where("item_id = '%d' and member_uid = '%d'  ",array($item_id,$uid))->find();
 		if ($TeamItemMember) {
 			return true;
