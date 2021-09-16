@@ -210,7 +210,7 @@ export default {
     beforeUpload(file) {
       if(this.containSpecial(file.name)){
          this.$message.error("文件名不能含有特殊字符")
-        return
+        return false
       }
       this.loading = this.$loading()
     },
